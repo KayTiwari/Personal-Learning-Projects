@@ -1,5 +1,19 @@
+
 .logoimg {
-    float: left;
+    position: relative;
+    top: 50px;
+    left: 79.7px;
+}
+
+.pinkgrad {
+    background-image: -webkit-linear-gradient(-60deg,hsl(322, 100%, 66%), hsl(265, 100%, 66%));
+    height: 700px;
+    width: 500px;
+}
+.pinkgradpos {
+    position: relative;
+    top: 350px;
+    left: 1010px;
 }
 
 .mockupsimg {
@@ -15,8 +29,7 @@
     position: relative;
     bottom: 0;
     left: -200px;
-    background-size: cover;
-    background-position: center;
+    size: 50%;
 
 }
 
