@@ -29,7 +29,8 @@
     position: relative;
     bottom: 0;
     left: -200px;
-    size: 50%;
+    width: 50%;
+    height: auto;
 
 }
 
