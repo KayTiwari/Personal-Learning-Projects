@@ -1,6 +1,7 @@
 .maroon {
-    background-color: #ff0400;
-    height: 97vh;
+    position: relative;
+    background-color: rgb(237, 54, 50);
+    height: 160vh;
     /* width: 90vw; */
     margin: 0;
     overflow: hidden;
@@ -11,9 +12,18 @@
     line-height: 1.2;
     text-align: center;
     margin: 0;
-    margin-top: 100px;
+    margin-top: 70px;
     color: white;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     padding: 7.6875rem 1.25rem 10rem;
+}
+.firstwhite {
+    position: absolute;
+    top: 752px;
+    /* left: 10px; */
+    background-color: white;
+    z-index: 1;
+    height: 100vh;
+    width: 100vw;
 }
