@@ -22,9 +22,9 @@ class AlbumList extends Component{
         })
     }
     renderAlbums() {
-        return this.state.albumdata.map(item => 
-        <AlbumDetail album={item}/>
-        )
+        return this.state.albumdata.map((item, i) => 
+        <AlbumDetail key={i} album={item}/>
+        );
     }
 
     render() {
