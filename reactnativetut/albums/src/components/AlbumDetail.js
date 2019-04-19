@@ -1,16 +1,62 @@
-import React, { Component } from 'react';
-import { Text } from 'react-native';
+import React from 'react';
+import { View, Text, Image, Linking } from 'react-native';
 import Card from './Card';
 import CardSection from './CardSection';
+import Button from './Button';
 
-export default class AlbumDetail extends Component {
-  render(props) {
+const AlbumDetail = (props) => {
+    console.log(props);
     return (
       <Card>
         <CardSection>
-        <Text>{props.album.title}</Text>
+        <View style={styles.thumbnailContainerStyles}>
+          <Image 
+          style={styles.thumbnailStyles}          
+          source={{ uri: props.album.thumbnail_image }}
+          />
+        </View>
+        <View style={styles.headerContentStyle}>
+          <Text style={styles.headerTextStyle}>{props.album.title}</Text>
+          <Text>{props.album.artist}</Text>
+        </View>
+        </CardSection>
+        <CardSection>
+          <Image 
+          style={styles.imageStyle}
+          source={{uri: props.album.image}}/>
+        </CardSection>
+        <CardSection>
+        <Button onPress={() => Linking.openURL(props.album.url)}/>
         </CardSection>
       </Card>
     )
   }
-}
+
+  const styles = {
+    headerContentStyle: {
+      flexDirection: 'column',
+      justifyContent: 'space-around',
+    },
+    headerTextStyle: {
+      fontSize: 18
+    },
+    thumbnailStyles: {
+      height: 50,
+      width: 50
+    },
+    thumbnailContainerStyles: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginLeft: 10,
+      marginRight: 10
+    },
+    imageStyle: {
+      height: 300,
+      flex: 1,
+      width: null
+    }
+  }
+  
+export default AlbumDetail
+
+
