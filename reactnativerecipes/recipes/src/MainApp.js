@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         fontWeight: '200',
         color: '#fff',
         position: 'absolute',
-        backgroundColor: 'transparent',
+        // backgroundColor: 'transparent',
         top: 12,
         left: 10,
     },
