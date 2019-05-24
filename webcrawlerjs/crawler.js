@@ -23,6 +23,7 @@ request(pageToVisit, function(error, response, body){
         console.log("Page title:  " + $('title').text());
         //Selects html element of <title> and displays text within it
         searchForWord($, 'baz')
+        collectInternalLinks($)
     }
 })
 
@@ -48,6 +49,20 @@ function searchForWord($, word){
 
 
 //Collecting links on a webpage
+//2 types of links -- relative: /relativepath or absolute: http://absolutepath.com
+//absolute paths can link to anywhere on the interwebz
+
+function collectInternalLinks($) {
+    let allRelativeLinks = [];
+    let allAbsoluteLinks = [];
+
+    let relativeLinks = $("a[href^='/']");
+    relativeLinks.each(function(){
+        allRelativeLinks.push($(this).attr('href'));
+    });
+    console.log("Found " + allRelativeLinks.length + " relative links");
+    console.log("Found " + allAbsoluteLinks.length + " absolute links");
+}
 
 
 
