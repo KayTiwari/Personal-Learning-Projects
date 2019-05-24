@@ -22,5 +22,32 @@ request(pageToVisit, function(error, response, body){
 
         console.log("Page title:  " + $('title').text());
         //Selects html element of <title> and displays text within it
+        searchForWord($, 'baz')
     }
 })
+
+
+
+
+//Searching for a specific word
+
+function searchForWord($, word){
+    var bodyText = $('html > body').text();
+    if (bodyText.toLowerCase().indexOf(word.toLowerCase()) !== -1){
+        console.log('true')
+        return true;
+    } else {
+        return false;
+    }
+}
+//indexOf is case sensitive
+
+
+
+
+
+
+//Collecting links on a webpage
+
+
+
