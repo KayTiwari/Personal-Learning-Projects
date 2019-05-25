@@ -1,0 +1,71 @@
+var request = require('request');
+var cheerio = require('cheerio');
+var URL = require('url-parse');
+
+
+var START_URL = "http://www.arstechnica.com"
+var SEARCH_WORD = "stemming";
+var MAX_PAGES_TO_VISIT = 10;
+
+var pagesVisited = {};
+var numPagesVisited = 0;
+var pagesToVisit = [];
+var url = new URL(START_URL);
+var baseUrl = url.protocol + "//" + url.hostname;
+
+pagesToVisit.push(START_URL);
+crawl();
+
+function crawl() {
+    if (numPagesVisited >= MAX_PAGES_TO_VISIT){
+        console.log("Reached page visit limit");
+        return 0;
+    }
+    var nextPage = pagesToVisit.pop();
+    if (nextPage in pagesVisited){
+        //we already reached this page so go back to crawl();
+        crawl();
+    } else {
+        //new page we haven't visited;
+        visitPage(nextPage, crawl);
+    }
+}
+
+function visitPage(url, callback){
+    // Add page to set
+    pagesVisited[url] = true;
+    numPagesVisited++;
+
+
+    // Make the request
+    console.log("Visiting the page: " + url)
+    request(url, function(error, response, body){
+        console.log('Status Code: ' + response.statusCode)
+        if (response.statusCode !== 200){
+            callback();
+            return 0;
+        }
+        // Parse document body
+        var $ = cheerio.load(body);
+        var isWordFound = searchForWord($, SEARCH_WORD);
+        if (isWordFound){
+            console.log('Word: ' + SEARCH_WORD + ' found at ' + url);
+        } else {
+            collectInternalLinks($);
+            callback();
+        }
+    })
+}
+
+function searchForWord($, word){
+    var bodyText = $('html > body').text().toLowerCase();
+    return (bodyText.indexOf(word.toLowerCase()) !== -1);
+}
+
+function collectInternalLinks($){
+    var relativeLinks = $("a[href^='/']");
+    console.log("Found " + relativeLinks.length + ' relative links on page');
+    relativeLinks.each(function(){
+        pagesToVisit.push(baseUrl + $(this).attr('href'));
+    });
+}

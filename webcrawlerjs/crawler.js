@@ -8,7 +8,11 @@ var URL = require('url-parse')
 //Used to parse urls
 
 
-var pageToVisit = "http://www.arstechnica.com";
+
+
+
+
+var pageToVisit = "http://arstechnica.com";
 console.log('Visiting page: ' + pageToVisit);
 
 request(pageToVisit, function(error, response, body){
@@ -60,9 +64,21 @@ function collectInternalLinks($) {
     relativeLinks.each(function(){
         allRelativeLinks.push($(this).attr('href'));
     });
+    let absoluteLinks = $("a[href^='http']");
+    absoluteLinks.each(function(){
+        allAbsoluteLinks.push($(this).attr('href'));
+    });
     console.log("Found " + allRelativeLinks.length + " relative links");
     console.log("Found " + allAbsoluteLinks.length + " absolute links");
 }
 
+
+
+
+
+//Check which pages we already visited
+var pagesVisited = {};
+
+// pagesVisited[url] = true;
 
 
