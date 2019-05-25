@@ -17,10 +17,5 @@ request("https://www.ksl.com/auto/search/index?priceFrom=1&priceTo=4000&zip=8400
       var miles = $(this).find('listing-detail-line mileage').text().trim();
       fs.appendFileSync('kslcars.txt', name + '\n' + price + '\n' + miles + '\n');
   })
-//   $('tr.athing:has(td.votelinks)').each(function( index ) {
-//     var title = $(this).find('td.title > a').text().trim();
-//     var link = $(this).find('td.title > a').attr('href');
-//     fs.appendFileSync('hackernews.txt', title + '\n' + link + '\n');
-//   });
 
 });

@@ -3,8 +3,8 @@ var cheerio = require('cheerio');
 var URL = require('url-parse');
 
 
-var START_URL = "http://www.arstechnica.com"
-var SEARCH_WORD = "stemming";
+var START_URL = "https://www.ksl.com/auto/search/index?priceFrom=1&priceTo=4000&zip=84009&miles=25&newUsed%5B%5D=New&newUsed%5B%5D=Used&newUsed%5B%5D=Certified&page=0#"
+var SEARCH_WORD = "camino";
 var MAX_PAGES_TO_VISIT = 10;
 
 var pagesVisited = {};

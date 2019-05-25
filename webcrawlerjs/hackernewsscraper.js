@@ -1,6 +1,6 @@
 var request = require('request');
 var cheerio = require('cheerio');
-var fs = require('fs');
+var fs = require('file-system');
 
 request("https://news.ycombinator.com/news", function(error, response, body) {
   if(error) {
@@ -13,7 +13,7 @@ request("https://news.ycombinator.com/news", function(error, response, body) {
   $('tr.athing:has(td.votelinks)').each(function( index ) {
     var title = $(this).find('td.title > a').text().trim();
     var link = $(this).find('td.title > a').attr('href');
-    fs.appendFileSync('hackernews', title + '\n' + link + '\n');
+    fs.appendFileSync('hackernews.txt', title + '\n' + link + '\n');
   });
 
 });
