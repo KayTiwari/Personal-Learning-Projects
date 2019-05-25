@@ -69,3 +69,14 @@ function collectInternalLinks($){
         pagesToVisit.push(baseUrl + $(this).attr('href'));
     });
 }
+
+
+
+
+//Improvements possible:
+
+// 1. Handle request errors
+// 2. Collect absolute links but check if they belong to the same domain before accessing them
+// 3. Read in the starting URL and the word to search for as command line arguments
+// 4. Use different User-Agents (an agent that behaves on behalf of the user) if there are problems making requests to websites
+// that filter using those HTTP headers.
