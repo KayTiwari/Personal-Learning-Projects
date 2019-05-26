@@ -2,11 +2,11 @@ const axios = require('axios');
 const request = require('request');
 const cheerio = require('cheerio')
 
-const url = 'https://news.ycombinator.com';
+const url = 'https://www.flipkart.com/';
 
 axios.get(url).then(response => {
-    // console.log(response.data);
-    getData(response.data);
+    console.log(response.data);
+    // getData(response.data);
 }).catch(err => {
     console.log(err);
 })
