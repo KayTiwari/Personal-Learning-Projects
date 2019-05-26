@@ -10,8 +10,8 @@ nightmare
 .wait('body')
 //wait for DOM to render
 .click('button._2AkmmA._29YdH8')
-.type('input.LM6RPg', 'nodejs books')
-.click('button_vh79eN')
+.type('input.LM6RPg', 'fuck you')
+.click('button.vh79eN')
 .wait('div.bhgxx2')
 .evaluate(() => document.querySelector('body').innerHTML)
 .end()
@@ -26,9 +26,17 @@ let getData = html => {
     data = [];
     const $ = cheerio.load(html);
 
-    for(var i = 0; i < 100; i++){
-        data.push($('div._3liAhj _1R0K0g > a._2cLu-l').text())
-        data.push($('div._3liAhj _1R0K0g > a._2cLu-l')).attr('href')
-    }
-    console.log(data);
-}
+    $('div._1HmYoV._35HD7C:nth-child(2) div.bhgxx2.col-12-12').each((row, raw_element) => {
+        $(raw_element).find('div div div').each((i, elem) => {
+            let title = $(elem).find('div div a:nth-child(2)').text();
+            let link = $(elem).find('div div a:nth-child(2)').attr('href');
+
+            if(title){
+                data.push({
+                    title: title,
+                    link: link
+                })
+            }
+            console.log(data);
+        })
+    })}
