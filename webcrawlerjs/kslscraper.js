@@ -1,21 +1,38 @@
-var request = require('request');
-var cheerio = require('cheerio');
-var fs = require('fs');
+const Nightmare = require('nightmare');
+const nightmare = Nightmare({show: true});
+//browser automation library -- similar to axios 
+const cheerio = require('cheerio');
 
-request("https://www.ksl.com/auto/search/index?priceFrom=1&priceTo=4000&zip=84009&miles=25&newUsed%5B%5D=New&newUsed%5B%5D=Used&newUsed%5B%5D=Certified", function(error, response, body) {
-  if(error) {
-    console.log("Error: " + error);
-  }
-  console.log("Status code: " + response.statusCode);
+const url = 'https://www.ksl.com/auto/search/index?priceFrom=1&priceTo=4000&zip=84009&miles=25&newUsed%5B%5D=New&newUsed%5B%5D=Used&newUsed%5B%5D=Certified';
 
-  var $ = cheerio.load(body);
-//   console.log($);
+nightmare
+.goto(url)
+.wait('body')
+//wait for DOM to render
+.evaluate(() => document.querySelector('body').innerHTML)
+.end()
+.then(response => {
+    console.log(getData(response));
+})
+.catch(error => {
+    console.log(error);
+})
 
-  $('div.listing').each(function (index){
-      var name = $(this).find('div.title < a.link').text().trim();
-      var price = $(this).find('listing-detail-line price').text().trim();
-      var miles = $(this).find('listing-detail-line mileage').text().trim();
-      fs.appendFileSync('kslcars.txt', name + '\n' + price + '\n' + miles + '\n');
-  })
+let getData = html => {
+    data = [];
+    const $ = cheerio.load(html);
 
-});
+    $('div._1HmYoV._35HD7C:nth-child(2) div.bhgxx2.col-12-12').each((row, raw_element) => {
+        $(raw_element).find('div div div').each((i, elem) => {
+            let title = $(elem).find('div div a:nth-child(2)').text();
+            let link = $(elem).find('div div a:nth-child(2)').attr('href');
+
+            if(title){
+                data.push({
+                    title: title,
+                    link: link
+                })
+            }
+            console.log(data);
+        })
+    })}
