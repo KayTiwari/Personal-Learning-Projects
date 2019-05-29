@@ -8,10 +8,20 @@ class App extends Component {
 
   render(){
     return(
-      <View></View>
+      <View style={styles.viewStyles}>
+        <Text>fuck you</Text>
+      </View>
     )
   }
 
 }
 
 export default App;
+
+const styles = StyleSheet.create({
+  viewStyles: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
+})
