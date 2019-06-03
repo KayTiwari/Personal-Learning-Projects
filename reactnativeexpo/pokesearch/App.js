@@ -1,24 +1,35 @@
 import React from 'react';
 import { StyleSheet, Text, View, Platform, Image } from 'react-native';
-import { Button } from 'native-base';
-
-var myBackground = require('./assets/landing.jpg');
+import Landing from './src/Landing'
+import Search from './src/Search'
 
 export default class App extends React.Component {
+  state = {
+    currentScreen: 'search'
+  }
+
+  renderScreen = () => {
+    if (this.state.currentScreen === 'landing'){
+      return (
+        <Landing switchScreen={this.switchScreen} />
+      )
+    } else if (this.state.currentScreen === 'search'){
+      return (
+        <Search />
+      )
+    }
+  }
+
+  switchScreen = (currentScreen) => {
+    this.setState({
+      currentScreen
+    })
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Image source={myBackground}  />
-        <View style={styles.viewStyles}>
-          <Text style={styles.titleStyle}>Welcome to PokeSearch</Text>
-          <Button
-          block={true}
-          style={styles.buttonStyle}
-          onPress={() => {}}
-          >
-          <Text style={styles.buttonText}>Start Searching</Text> 
-          </Button>
-        </View>
+        {this.renderScreen()}
       </View>
     );
   }
