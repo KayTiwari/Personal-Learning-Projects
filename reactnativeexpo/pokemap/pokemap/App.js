@@ -10,7 +10,6 @@ const SERVER_URL = 'ws://localhost:3000/websocket'
 
 export default class App extends React.Component {
   state = {
-    currentScreen: '',
     loggedIn: false
   }
   componentWillMount(){
@@ -31,9 +30,9 @@ export default class App extends React.Component {
     if (!this.state.loggedIn) {
       return (
         <SignIn signIn={this.signIn}/>
-      )
-    } else {
-      <PokeMap />
+        )
+      } else if(this.state.loggedIn) {
+        <PokeMap />
     }
   }
 
@@ -57,7 +56,8 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        {this.renderView()}
+        {/* {this.renderView()} */}
+        <PokeMap />
       </View>
     );
   }
