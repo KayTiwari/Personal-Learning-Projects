@@ -36,8 +36,13 @@ class PokeMap extends Component{
                 provider={MapView.PROVIDER_GOOGLE}
                 customMapStyle={mapStyle}
                 >
-
                 </MapView>
+                <Fab direction='left' position='bottomRight' >
+                <Icon name='add' />
+                </Fab>
+                <Fab direction='right' position='bottomLeft' >
+                <Icon name='remove' />
+                </Fab>
             </View>
         )
     }
