@@ -13,7 +13,8 @@ class SignIn extends Component{
     }
 
     logIn = () => {
-
+        var {email, password} = this.state;
+        this.props.signIn(email, password);
     }
 
     render(){
