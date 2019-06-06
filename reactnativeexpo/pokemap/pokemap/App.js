@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import SignIn from './src/SignIn';
 import Meteor, { createContainer, Accounts } from 'react-native-meteor';
+import PokeMap from './src/PokeMap';
 
 const SERVER_URL = 'ws://localhost:3000/websocket'
 //defines meteor server
@@ -9,15 +10,33 @@ const SERVER_URL = 'ws://localhost:3000/websocket'
 
 export default class App extends React.Component {
   state = {
-    currentScreen: ''
+    currentScreen: '',
+    loggedIn: false
   }
   componentWillMount(){
     Meteor.connect(SERVER_URL);
     //connects to meteor server
+    console.log(Meteor.userId());
     if(Meteor.userId()){
       this.flipLogin(true);
     }
   }
+  flipLogin = (x) => {
+    this.setState({
+      loggedIn: x
+    })
+  }
+
+  renderView = () => {
+    if (!this.state.loggedIn) {
+      return (
+        <SignIn signIn={this.signIn}/>
+      )
+    } else {
+      <PokeMap />
+    }
+  }
+
   signIn = (email, password) => {
     Meteor.loginWithPassword(email, password, (err, data)=> {
       //built in meteor function
@@ -28,7 +47,8 @@ export default class App extends React.Component {
           })
         }
       } else {
-        console.log('email');
+        // console.log('email');
+        this.flipLogin(true);
       }
     });
     console.log(Meteor.userId());
@@ -37,7 +57,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <SignIn signIn={this.signIn}/>
+        {this.renderView()}
       </View>
     );
   }
