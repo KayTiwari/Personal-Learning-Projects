@@ -14,12 +14,15 @@ export default class App extends React.Component {
   componentWillMount(){
     Meteor.connect(SERVER_URL);
     //connects to meteor server
+    if(Meteor.userId()){
+      this.flipLogin(true);
+    }
   }
   signIn = (email, password) => {
     Meteor.loginWithPassword(email, password, (err, data)=> {
       //built in meteor function
       if (err){
-        if(err.reason === 'User was not found'){
+        if(err.reason === 'User not found'){
           Accounts.createUser({email, password}, (err)=>{
             console.log(err);
           })

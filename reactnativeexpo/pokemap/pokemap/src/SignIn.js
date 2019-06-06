@@ -13,7 +13,7 @@ class SignIn extends Component{
     }
 
     logIn = () => {
-        console.log(this.state)
+        // console.log(this.state)
         const {email, password} = this.state;
         this.props.signIn(email, password);
     }
