@@ -13,7 +13,8 @@ class SignIn extends Component{
     }
 
     logIn = () => {
-        var {email, password} = this.state;
+        console.log(this.state)
+        const {email, password} = this.state;
         this.props.signIn(email, password);
     }
 
@@ -25,7 +26,7 @@ class SignIn extends Component{
                         <Form>
                             <Item floatingLabel>
                                 <Label>E-mail</Label>
-                                <Input autoCorrect={false} onChangeText={(email) => this.setState({email})}/>
+                                <Input autoCorrect={false} onChangeText={(text) => this.setState({email: text})}/>
                             </Item>
                             <Item floatingLabel>
                                 <Label>Password</Label>
@@ -33,7 +34,7 @@ class SignIn extends Component{
                             </Item>
                         </Form>
                         <View style={{marginTop: 10}}>
-                            <Button primary block onPress={() => this.logIn}>
+                            <Button primary block onPress={() => this.logIn()}>
                                 <Text style={{color: 'white', fontWeight:"bold"}}>Sign-In/Sign-Up</Text>
                             </Button>
                         </View>
