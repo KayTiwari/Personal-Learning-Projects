@@ -1,7 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import {Pokemon} from '../imports/collections/pokemon';
-import fs from Npm.require('fs')
 //needs braces
+var fs = Npm.require('fs')
+//add filesystem methods
 
 Meteor.startup(() => {
   
@@ -17,6 +18,7 @@ Meteor.methods({
             console.log('user not signed in')
             return;
         }
+        console.log('adding pokemon')
         var range = 0.035;
         var range1 = Math.random() > 0.5 ? range : -range;
         var range2 = Math.random() > 0.5 ? range : -range;
